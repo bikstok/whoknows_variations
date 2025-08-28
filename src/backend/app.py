@@ -11,8 +11,9 @@ from flask import Flask, request, session, url_for, redirect, render_template, g
 # Configuration
 ################################################################################
 
-DATABASE_PATH = 'C:\Users\jkjae\Documents\DevOps_Semester\whoknows_variations\src\backend\whoknows.db'
-PER_PAGE = 30
+
+DATABASE_PATH = 'whoknows.db'
+PER_PAGE = 30   
 DEBUG = False
 SECRET_KEY = 'development key'
 
@@ -36,7 +37,7 @@ def check_db_exists():
     """Checks if the database exists."""
     db_exists = os.path.exists(DATABASE_PATH)
     if not db_exists:
-        print "Database not found"
+        print("Database not found")
         sys.exit(1)
     else:
         return db_exists
@@ -48,7 +49,7 @@ def init_db():
         with app.open_resource('../schema.sql') as f:
             db.cursor().executescript(f.read().decode('utf-8'))
         db.commit()
-        print "Initialized the database: " + str(DATABASE_PATH)
+        print ("Initialized the database: ") + str(DATABASE_PATH)
 
 
 def query_db(query, args=(), one=False):
